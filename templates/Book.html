@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Madhan Ticket Booking</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 15px;
+    background: #f4f6f9;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Main card */
+.booking-card {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Sections */
+.section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+/* Form layout */
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+input[readonly] {
+    background: #eee;
+}
+
+/* Bus type */
+#bus_type {
+    display: flex;
+    gap: 20px;
+}
+
+/* Passenger blocks */
+.passenger {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.passenger input {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Price box */
+#dispay_price {
+    background: #f0f8ff;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+/* Button */
+#book_btn {
+    width: 100%;
+    padding: 14px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#book_btn:hover {
+    background: #1e7e34;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+    #bus_type {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h2>Welcome To Madhan Ticket Booking Application</h2>
+
+<form method="post" class="booking-card">
+
+    <!-- Journey Details -->
+    <div class="section">
+        <div class="section-title">Journey Details</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Source</label>
+                <input value="{{src}}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Destination</label>
+                <input value="{{dst}}" readonly>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Distance (Kms)</label>
+                <input value="{{distance}}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Price per Ticket (Rs)</label>
+                <input id="price" value="{{price}}" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bus Details -->
+    <div class="section">
+        <div class="section-title">Bus Details</div>
+
+        <label>Bus Type</label>
+        <div id="bus_type">
+            <label><input type="radio" name="bus_type" value="AC"> AC</label>
+            <label><input type="radio" name="bus_type" value="NON-AC" checked> NON-AC</label>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Number of Passengers</label>
+                <select name="no_pass" id="no_pass">
+                    <option value="0">Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Bus Category</label>
+                <select name="bus_selection">
+                    <option value="">Select</option>
+                    <option>APSRTC</option>
+                    <option>KSRTC</option>
+                    <option>Super Luxury</option>
+                    <option>GARUDA</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Passenger Details -->
+    <div class="section">
+        <div class="section-title">Passenger Details</div>
+
+        <div class="passenger" id="person1" style="display:none">
+            <input value="{{booking_id}}" readonly>
+            <input name="name1" placeholder="Passenger 1 Name">
+            <input name="phone1" placeholder="Phone">
+        </div>
+
+        <div class="passenger" id="person2" style="display:none">
+            <input value="{{booking_id}}" readonly>
+            <input name="name2" placeholder="Passenger 2 Name">
+            <input name="phone2" placeholder="Phone">
+        </div>
+
+        <div class="passenger" id="person3" style="display:none">
+            <input value="{{booking_id}}" readonly>
+            <input name="name3" placeholder="Passenger 3 Name">
+            <input name="phone3" placeholder="Phone">
+        </div>
+
+        <div class="passenger" id="person4" style="display:none">
+            <input value="{{booking_id}}" readonly>
+            <input name="name4" placeholder="Passenger 4 Name">
+            <input name="phone4" placeholder="Phone">
+        </div>
+    </div>
+
+    <!-- Total Price -->
+    <div class="section" id="dispay_price" style="display:none">
+        <label>Total Price (Rs)</label>
+        <input id="total_price" name="total_price" readonly>
+    </div>
+
+    <input type="submit" value="Book Ticket" id="book_btn" style="display:none">
+
+</form>
+
+<script>
+const num = document.getElementById("no_pass");
+const type_id = document.getElementById("bus_type");
+
+function calculatePrice() {
+    const no_per = parseInt(num.value || 0);
+    const price = parseInt(document.getElementById('price').value || 0);
+    const type_bus = document.querySelector('input[name="bus_type"]:checked').value;
+
+    let total_price = 0;
+    if (type_bus === 'AC') {
+        total_price = no_per * (price + 30);
+    } else {
+        total_price = no_per * price;
+    }
+
+    document.getElementById('total_price').value = total_price;
+    document.getElementById('dispay_price').style.display = no_per > 0 ? "block" : "none";
+    document.getElementById('book_btn').style.display = no_per > 0 ? "block" : "none";
+
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById('person' + i).style.display = i <= no_per ? "flex" : "none";
+    }
+}
+
+num.addEventListener('change', calculatePrice);
+type_id.addEventListener('change', calculatePrice);
+</script>
+</body>
+</html>

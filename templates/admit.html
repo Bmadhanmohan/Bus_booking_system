@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Tickets Data</title>
+    <style>
+        body { font-family: Arial; background: #f2f2f2; }
+        .invoice {
+            background: #fff;
+            width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        h2, h3 { text-align: center; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .section-title {
+            background: #eee;
+            font-weight: bold;
+            text-align: left;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 18px;
+            text-align: right;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+
+<div class="invoice" id="invoice">
+
+    <h2>Bus Ticket Data</h2>
+    <!-- Passenger Details -->
+    <table>
+        <tr><td colspan="7" class="section-title">Passenger Details</td></tr>
+        <th><tr><td>Sl.No</td><td>Booking_Id</td><td>Name</td><td>Mobile</td><td>Seat_number</td></tr></th>
+        {% for inv in person_details %}
+        <tr><td>{{ loop.index }}</td><td>{{ inv.Booking_Id }}</td><td>{{ inv.name }}</td><td>{{ inv.phone }}</td><td>{{ inv.Seat_number }}</td></tr>
+        {% endfor %}
+
+    </table>
+     <table><tr><td colspan="2" class="section-title">Detailed Report</td></tr><br><br>
+        </table>
+
+    {% for inv in invoices %}
+    <!-- Booking Details -->
+    <table>
+        <tr><td colspan="2" class="section-title">Booking Details</td></tr>
+        <tr><td>Booking ID</td><td>{{ inv.Booking_Id }}</td></tr>
+        <tr><td>From</td><td>{{ inv.source }}</td></tr>
+        <tr><td>To</td><td>{{ inv.destination }}</td></tr>
+        <tr><td>Seat Type</td><td>{{ inv.seat_type }}</td></tr>
+        <tr><td>Bus Type</td><td>{{ inv.Selected_bus }}</td></tr>
+    </table>
+
+    <!-- Fare Details -->
+    <table>
+        <tr><td colspan="2" class="section-title">Fare Details</td></tr>
+        <tr><td>Price per Seat</td><td>₹{{ inv.price }}</td></tr>
+        <tr><td>Distance</td><td>{{ inv.distance }}Kms</td></tr>
+        <tr><td>No. of Persons</td><td>{{ inv.No_passengers }}</td></tr>
+        <tr>
+            <td class="total">Total Price</td>
+            <td class="total">₹{{ inv.Total_price }}</td>
+        </tr>
+    </table>
+{% endfor %}
+</div>
+<button id="Download">Download As PDF</button>
+<script>
+    const btn = document.getElementById('Download')
+    btn.addEventListener('click', function (){
+        const down_id = document.getElementById('invoice')
+        const opt = {
+        margin:       0.5,
+        filename:     "Bus_bookings.pdf",
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(down_id).save();
+    });
+
+</script>
+</body>
+</html>
