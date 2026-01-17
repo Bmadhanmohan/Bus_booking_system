@@ -31,6 +31,27 @@
             font-size: 18px;
             text-align: right;
         }
+        .btn_section{
+            cursor: progress;
+            box-shadow: #181818;
+            width: 25%;
+            padding: 14px;
+            background: linear-gradient(rgb(109, 197, 90),rgb(79, 79, 224));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            position:relative;
+            left:35%;
+            margin-bottom:10px;
+        }
+        .btn_section:hover{
+            transform: translate(-50%,-50%);
+            box-shadow: 5px 8px 10px #262020;
+
+
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -71,9 +92,9 @@
             <td class="total">₹{{ inv.Total_price }}</td>
         </tr>
     </table>
+    <button class="btn_section" id="Download">Download PDF</button>
 {% endfor %}
 </div>
-<button id="Download">Download PDF</button>
 <script>
     const btn = document.getElementById('Download')
     btn.addEventListener('click', function (){
