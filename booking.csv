@@ -1,2 +1,14 @@
 Booking_Id,name,phone,source,destination,distance,price,seat_type,Selected_bus,Seat_number,No_passengers,Total_price
 7968876820,konappagari,6887788,Tirupati,Manglore,500.2,925.0,NON-AC,APSRTC,5,1,925
+7277031956,,,Palamaner,Manglore,422.89,780.7,AC,KSRTC,30,2,1620
+7277031956,,,Palamaner,Manglore,422.89,780.7,AC,KSRTC,22,2,1620
+4293243597,vhjf,yjff,Palamaner,Tirupati,86.7,159.1,AC,APSRTC,6,2,378
+4293243597,,,Palamaner,Tirupati,86.7,159.1,AC,APSRTC,25,2,378
+5593583695,mdh,hii,Delhi,Palamaner,1721.22,3183.85,AC,APSRTC,13,1,3213
+6023049996,mdh,hii,Delhi,Palamaner,1721.22,3183.85,AC,APSRTC,19,3,9639
+6023049996,hii,898,Delhi,Palamaner,1721.22,3183.85,AC,APSRTC,18,3,9639
+6023049996,hjj,ioi,Delhi,Palamaner,1721.22,3183.85,AC,APSRTC,27,3,9639
+6499142854,,,Delhi,Palamaner,1721.22,3183.85,NON-AC,APSRTC,10,1,3183
+7000056228,55666666777,,Delhi,Palamaner,1721.22,3183.85,NON-AC,APSRTC,27,1,3183
+9858234080,hi,hyhg,Delhi,Palamaner,1721.22,3183.85,NON-AC,KSRTC,15,1,3183
+1735929111,hi,hyhg,Delhi,Palamaner,1721.22,3183.85,NON-AC,KSRTC,22,1,3183
