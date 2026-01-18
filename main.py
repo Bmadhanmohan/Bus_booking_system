@@ -77,6 +77,20 @@ def Bill():
         booking_data=df.loc[df['Booking_Id']==int(booking_id),~df.columns.isin(['name','phone','Seat_number'])].drop_duplicates().to_dict(orient='records')    
     return render_template('Bill.html',invoices=booking_data,person_details=person_details)
 
+@app.route('/admin_login',methods=['GET','POST'])
+def admin_login():
+    if request.method == 'POST':
+        usr = request.form['username']
+        psw = request.form['password']
+        if usr =='Madhan' and psw == 'Madhan2001@mr':
+            return redirect(url_for("alert_noseat",message=f"Login successfull Loading....Admin Page......",redirect_url="/admit",booking_id='',alert_type='success'))
+        else:
+            return redirect(url_for("alert_noseat",message=f"Login failed Incorrect username or password",redirect_url="/admin_login",booking_id='',alert_type='danger'))
+
+    return render_template('login.html')
+
+
+
 @app.route('/admit',methods=['GET','POST'])
 def admit():
     df = pd.read_csv('booking.csv')

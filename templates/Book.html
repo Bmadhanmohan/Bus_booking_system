@@ -171,7 +171,7 @@ input[readonly] {
         <div class="form-row">
             <div class="form-group">
                 <label>Number of Passengers</label>
-                <select name="no_pass" id="no_pass">
+                <select name="no_pass" id="no_pass" required>
                     <option value="0">Select</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -182,7 +182,7 @@ input[readonly] {
 
             <div class="form-group">
                 <label>Bus Category</label>
-                <select name="bus_selection">
+                <select name="bus_selection" required>
                     <option value="">Select</option>
                     <option>APSRTC</option>
                     <option>KSRTC</option>
@@ -197,28 +197,28 @@ input[readonly] {
     <div class="section">
         <div class="section-title">Passenger Details</div>
 
-        <div class="passenger" id="person1" style="display:none">
+        <div class="passenger" id="person1" style="display:none" >
             <input value="{{booking_id}}" readonly>
-            <input name="name1" placeholder="Passenger 1 Name">
-            <input name="phone1" placeholder="Phone">
+            <input name="name1" placeholder="Passenger 1 Name"  id="name1">
+            <input name="phone1" placeholder="Phone" id="phone1" >
         </div>
 
         <div class="passenger" id="person2" style="display:none">
             <input value="{{booking_id}}" readonly>
-            <input name="name2" placeholder="Passenger 2 Name">
-            <input name="phone2" placeholder="Phone">
+            <input name="name2" placeholder="Passenger 2 Name" id="name2">
+            <input name="phone2" placeholder="Phone" id="phone2">
         </div>
 
         <div class="passenger" id="person3" style="display:none">
             <input value="{{booking_id}}" readonly>
-            <input name="name3" placeholder="Passenger 3 Name">
-            <input name="phone3" placeholder="Phone">
+            <input name="name3" placeholder="Passenger 3 Name" id="name3">
+            <input name="phone3" placeholder="Phone" id="phone3">
         </div>
 
         <div class="passenger" id="person4" style="display:none">
             <input value="{{booking_id}}" readonly>
-            <input name="name4" placeholder="Passenger 4 Name">
-            <input name="phone4" placeholder="Phone">
+            <input name="name4" placeholder="Passenger 4 Name" id="name4">
+            <input name="phone4" placeholder="Phone" id="phone4">
         </div>
     </div>
 
@@ -254,6 +254,14 @@ function calculatePrice() {
 
     for (let i = 1; i <= 4; i++) {
         document.getElementById('person' + i).style.display = i <= no_per ? "flex" : "none";
+    }
+    for (let i = 1; i <= no_per; i++) {
+        document.getElementById('name' + i).setAttribute('required','required')
+        document.getElementById('phone' + i).setAttribute('required','required')
+    }
+    for (let i = no_per+1 ; i <= 4; i++) {
+        document.getElementById('name' + i).removeAttribute('required','required')
+        document.getElementById('phone' + i).removeAttribute('required','required')
     }
 }
 

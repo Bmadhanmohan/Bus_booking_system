@@ -31,15 +31,33 @@
             font-size: 18px;
             text-align: right;
         }
+        .btn_section{
+            width: 10%;
+            padding: 14px;
+            background: linear-gradient(rgb(3, 14, 1),rgb(44, 4, 13));
+            color: rgb(239, 237, 237);
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;font-weight: bolder;
+            position:fixed;
+            left:3%;
+            top:3%;
+        }
+        .btn_section:hover{
+            box-shadow: 5px 8px 10px #262020;
+
+
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-
+    <button id="Download" class="btn_section">Download As PDF</button>
 <div class="invoice" id="invoice">
 
     <h2>Bus Ticket Data</h2>
+
     <!-- Passenger Details -->
     <table>
         <tr><td colspan="7" class="section-title">Passenger Details</td></tr>
@@ -76,7 +94,6 @@
     </table>
 {% endfor %}
 </div>
-<button id="Download">Download As PDF</button>
 <script>
     const btn = document.getElementById('Download')
     btn.addEventListener('click', function (){
