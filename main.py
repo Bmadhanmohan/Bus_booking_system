@@ -95,6 +95,8 @@ def admin_login():
 def admit():
     df = pd.read_csv('booking.csv')
     df1=df
+    summary_df = (df.groupby(["source", "destination", "seat_type", "Selected_bus"]).agg(no_seats_booked=("Booking_Id", "count"),total_amount=("Total_price", "sum")).reset_index().rename(columns={"seat_type": "seattype","Selected_bus": "bustype"}))
+    summary_df["no_empty_seats"] = 30-summary_df["no_seats booked] 
     person_details=df[['Booking_Id','name','phone','Seat_number']].drop_duplicates().to_dict(orient='records')
     detailed_records=df1.drop(columns=['name','phone','Seat_number']).drop_duplicates().to_dict(orient='records')  
     return render_template('admit.html',invoices=detailed_records,person_details=person_details)
